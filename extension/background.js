@@ -1,3 +1,5 @@
+import { config } from './config.js';
+
 chrome.runtime.onInstalled.addListener(() => {
     console.log("Extension installed");
 
@@ -84,10 +86,10 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         });
     }
 })
-// added
+
 async function query(data) {
     const response = await fetch(
-        "https://flowise.local/api/v1/prediction/31c8382a-0461-4d43-9214-8af5bebe83d2",
+        config.textEndpoint,
         {
             method: "POST",
             headers: {
