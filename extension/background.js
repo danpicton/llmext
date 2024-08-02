@@ -102,11 +102,6 @@ async function query(data) {
     return result;
 }
 
-//query({"question": "Hey, how are you?"}).then((response) => {
-//    console.log(response);
-//});
-// addded
-
 function sendPayloadToServer(endpoint, payload) {
     fetch(endpoint, {
         method: 'POST',
