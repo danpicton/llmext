@@ -22,12 +22,12 @@ function createContextMenus() {
 
     contextMenuItems.forEach(item => {
         chrome.contextMenus.create(item, () => {
-        if (chrome.runtime.lastError) {
+            if (chrome.runtime.lastError) {
                 console.error(`Error creating context menu ${item.id}: ${chrome.runtime.lastError}`);
-        } else {
+            } else {
                 console.log(`${item.title} context menu created successfully`);
-        }
-    });
+            }
+        });
     });
 }
 
@@ -42,22 +42,22 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         case "sendTextToBackend":
             if (info.selectionText) {
                 sendPayloadToServer(config.textEndpoint, { question: `${config.defaultTextPrompt}\n${info.selectionText}` });
-    }
+            }
             break;
         case "sendTextToBackendPrompted":
             if (info.selectionText) {
                 openPromptWindow(`prompt.html?text=${encodeURIComponent(info.selectionText)}`);
-    }
+            }
             break;
         case "sendImageToBackend":
             if (info.srcUrl) {
-        sendPayloadToServer(config.imgEndpoint, { imageUrl: info.srcUrl });
-    }
+                sendPayloadToServer(config.imgEndpoint, { imageUrl: info.srcUrl });
+            }
             break;
         case "sendImageToBackendPrompted":
             if (info.srcUrl) {
                 openPromptWindow(`prompt.html?imageUrl=${encodeURIComponent(info.srcUrl)}`);
-    }
+            }
             break;
     }
 });
@@ -116,11 +116,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'sendSelectedText') {
         sendPayloadToServer(config.textEndpoint, {
             question: `Please apply this prompt "${request.prompt}" to the following text:\n${request.text}`
-});
+        });
     } else if (request.action === 'sendImageUrl') {
-        sendPayloadToServer(config.imgEndpoint, { 
-            imageUrl: request.imageUrl, 
-            prompt: request.prompt 
+        sendPayloadToServer(config.imgEndpoint, {
+            imageUrl: request.imageUrl,
+            prompt: request.prompt
         });
     }
     sendResponse({ status: 'success' });
