@@ -12,5 +12,8 @@
   },
   "action": {
     "default_popup": "prompt.html"
+  },
+  "icons": {
+    "48": "icon.png"
   }
 }
