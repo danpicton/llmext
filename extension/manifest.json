@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0",
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "prompt.html"
+  },
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0",
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "prompt.html"
+  },
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0",
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "prompt.html"
+  }
+}
