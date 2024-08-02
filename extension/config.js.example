@@ -1,4 +1,10 @@
 export const config = {
   textEndpoint: '<insert endpoint>',
-  imgEndpoint: '<insert endpoint>'
+  imgEndpoint: '<insert endpoint>',
+  defaultTextPrompt: 'Please summarise the following in markdown format using multi-level bullet points only. ' +
+                     'Lower level bullet points should be tab indented, and each bullet points should be as succinct ' +
+                     'as possible.',
+  defaultImgPrompt: 'Please summarise this image in markdown format using multi-level bullet points only. ' +
+                    'Lower level bullet points should be tab indented, and each bullet points should be as succinct ' +
+                    'as possible.'
 };
