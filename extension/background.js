@@ -108,7 +108,7 @@ async function sendPayloadToServer(endpoint, payload) {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'sendSelectedText') {
-        sendPayloadToServer(config.textEndpoint, { text: request.text, prompt: request.prompt });
+        sendPayloadToServer(config.textEndpoint, { question: 'Please apply this prompt "' + request.prompt + '" to the following text:/n' + request.text });
     } else if (request.action === 'sendImageUrl') {
         sendPayloadToServer(config.imgEndpoint, { imageUrl: request.imageUrl, prompt: request.prompt });
     }
