@@ -58,10 +58,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === "sendToTestServer" && info.selectionText) {
-        //sendPayloadToServer('http://localhost:8080/text', { text: info.selectionText });
-        query({"question": "Hey, how are you?"}).then((response) => {
-            console.log(response);
-        });
+        sendPayloadToServer(config.textEndpoint, { question: config.defaultTextPrompt + '/n' + info.selectionText });
     }
 
     if (info.menuItemId === "sendToTestServerWithPrompt" && info.selectionText) {
@@ -74,7 +71,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
 
     if (info.menuItemId === "sendImageToTestServer" && info.srcUrl) {
-        sendPayloadToServer('http://localhost:8080/image', { imageUrl: info.srcUrl });
+        sendPayloadToServer(config.imgEndpoint, { imageUrl: info.srcUrl });
     }
 
     if (info.menuItemId === "sendImageToTestServerWithPrompt" && info.srcUrl) {
@@ -87,44 +84,33 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
 })
 
-async function query(data) {
-    const response = await fetch(
-        config.textEndpoint,
-        {
+async function sendPayloadToServer(endpoint, payload) {
+    try {
+        const response = await fetch(endpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(data)
-        }
-    );
-    const result = await response.json();
-    return result;
-}
+            body: JSON.stringify(payload)
+        });
 
-function sendPayloadToServer(endpoint, payload) {
-    fetch(endpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
         }
-        return response.json();
-    })
-    .then(data => console.log("Payload successfully sent to the server:", data))
-    .catch(error => console.error("Error sending payload to the server:", error));
+
+        const result = await response.json();
+        console.log("Payload successfully sent to the server:", result);
+        return result;
+    } catch (error) {
+        console.error("Error sending payload to the server:", error);
+    }
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'sendSelectedText') {
-        sendPayloadToServer('http://localhost:8080/text', { text: request.text, prompt: request.prompt });
+        sendPayloadToServer(config.textEndpoint, { text: request.text, prompt: request.prompt });
     } else if (request.action === 'sendImageUrl') {
-        sendPayloadToServer('http://localhost:8080/image', { imageUrl: request.imageUrl, prompt: request.prompt });
+        sendPayloadToServer(config.imgEndpoint, { imageUrl: request.imageUrl, prompt: request.prompt });
     }
     sendResponse({ status: 'success' });
 });
