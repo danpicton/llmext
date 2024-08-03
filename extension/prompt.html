@@ -3,31 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Enter Prompt</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-        .selected-item {
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Enter Prompt</h1>
-    <div id="selectedItem" class="selected-item"></div>
-    <textarea id="promptText"></textarea><br>
-    <button id="sendButton">Send</button>
+    <div class="container">
+        <h1>Enter Prompt</h1>
+        <div class="prompt-message">This prompt will be applied to your selected text.</div>
+        <textarea id="promptText"></textarea><br>
+        <button id="sendButton">Send</button>
+    </div>
 
     <script src="prompt.js"></script>
 </body>

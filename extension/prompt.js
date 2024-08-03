@@ -3,14 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = urlParams.get('text');
     const imageUrl = urlParams.get('imageUrl');
 
-    const selectedItem = document.getElementById('selectedItem');
-    if (text) {
-        selectedItem.textContent = `Selected Text: ${text}`;
-    }
-    if (imageUrl) {
-        selectedItem.textContent = `Image URL: ${imageUrl}`;
-    }
-
     const promptText = document.getElementById('promptText');
     promptText.focus();
 
