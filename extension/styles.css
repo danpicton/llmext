@@ -1,32 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
-body {
-    font-family: 'DM Sans', sans-serif;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'DM Sans', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    background: var(--bg-color);
     transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     background: var(--bg-color);
     color: var(--text-color);
     padding: 20px;
-    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 100%;
     max-width: 400px;
+    min-width: 300px;
+    box-sizing: border-box;
 }
 
 h1 {
     font-weight: 500;
     margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
 }
 
 textarea {
@@ -38,6 +42,7 @@ textarea {
     border-radius: 5px;
     resize: none;
     transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
 button {
@@ -48,6 +53,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    align-self: flex-end;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -60,29 +66,30 @@ button:hover {
     font-weight: 400;
     margin-bottom: 10px;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
+    width: 100%;
 }
 
 /* Light Mode */
 :root {
-    --bg-color: #f5e0dc;
-    --text-color: #000000;
-    --border-color: #d9ccc3;
-    --button-bg-color: #d9ccc3;
-    --button-text-color: #000000;
-    --button-hover-bg-color: #f2cdcd;
-    --button-hover-text-color: #000000;
+    --bg-color: #fbf1c7;
+    --text-color: #3c3836;
+    --border-color: #d5c4a1;
+    --button-bg-color: #a89984;
+    --button-text-color: #3c3836;
+    --button-hover-bg-color: #928374;
+    --button-hover-text-color: #3c3836;
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #262335;
-        --text-color: #ffffff;
-        --border-color: #3b3a4c;
-        --button-bg-color: #3b3a4c;
-        --button-text-color: #ffffff;
-        --button-hover-bg-color: #454454;
-        --button-hover-text-color: #ffffff;
+        --bg-color: #282828;
+        --text-color: #ebdbb2;
+        --border-color: #3c3836;
+        --button-bg-color: #504945;
+        --button-text-color: #ebdbb2;
+        --button-hover-bg-color: #3c3836;
+        --button-hover-text-color: #ebdbb2;
     }
 }

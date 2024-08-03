@@ -5,8 +5,9 @@ import { config } from './config.js';
  */
 chrome.runtime.onInstalled.addListener(() => {
     console.log("Extension installed");
-
     createContextMenus();
+    // Set default popup for the extension action button
+    chrome.action.setPopup({ popup: 'prompt.html' });
 });
 
 /**
@@ -46,7 +47,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             break;
         case "sendTextToBackendPrompted":
             if (info.selectionText) {
-                openPromptWindow(`prompt.html?text=${encodeURIComponent(info.selectionText)}`);
+                chrome.storage.local.set({ selectedText: info.selectionText, type: 'text' }, () => {
+                    chrome.action.openPopup();
+                });
             }
             break;
         case "sendImageToBackend":
@@ -56,7 +59,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             break;
         case "sendImageToBackendPrompted":
             if (info.srcUrl) {
-                openPromptWindow(`prompt.html?imageUrl=${encodeURIComponent(info.srcUrl)}`);
+                chrome.storage.local.set({ selectedText: info.srcUrl, type: 'image' }, () => {
+                    chrome.action.openPopup();
+                });
             }
             break;
     }
@@ -89,20 +94,6 @@ async function sendPayloadToServer(endpoint, payload) {
     } catch (error) {
         console.error("Error sending payload to the server:", error);
     }
-}
-
-/**
- * Open a popup window with the specified URL.
- * 
- * @param {string} url - The URL to open in the popup window.
- */
-function openPromptWindow(url) {
-    chrome.windows.create({
-        url,
-        type: "popup",
-        width: 400,
-        height: 300
-    });
 }
 
 /**
