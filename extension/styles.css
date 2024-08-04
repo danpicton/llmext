@@ -3,19 +3,22 @@
 .extension-container html, .extension-container body {
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    max-width: 400px;
+    min-width: 300px;
     font-family: 'DM Sans', sans-serif;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
-    background: var(--bg-color);
+    background-color: var(--bg-color);
     transition: background-color 0.3s, color 0.3s;
 }
 
 .extension-container .container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-center;
+    /* align-items: flex-start; */
     background: var(--bg-color);
     color: var(--text-color);
     padding: 20px;
@@ -43,6 +46,7 @@
     resize: none;
     transition: border-color 0.3s;
     box-sizing: border-box;
+    background-color: #ffffff;
 }
 
 .extension-container button {
