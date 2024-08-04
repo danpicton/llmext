@@ -99,16 +99,16 @@
 /* Modal Styles */
 .llm-modal {
     position: fixed !important; /* Use fixed position to overlay entire viewport */
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important; /* Center the modal */
+    top: 8% !important; /* Move the modal down to start at 20% from the top */
+    left: 50% !important; /* Center horizontally */
+    transform: translate(-50%, 0) !important; /* Keep position aligned without affecting vertical */
     margin: 0 !important;
     padding: 10px !important;
-    background: transparent !important;
+    background: transparent !important; /* Outer background transparent */
     z-index: 999999999 !important;
     max-width: 800px !important;
     min-width: 340px !important;
-    display: none;
+    display: none; /* Hidden by default */
 }
 
 .llm-modal.show {
@@ -116,7 +116,7 @@
 }
 
 .llm-modal-content {
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* Keep the content background color */
     color: var(--text-color);
     padding: 20px;
     border: 1px solid var(--border-color);
