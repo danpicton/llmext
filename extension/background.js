@@ -90,6 +90,18 @@ async function sendPayloadToServer(endpoint, payload) {
 
         const result = await response.json();
         console.log("Payload successfully sent to the server:", result);
+
+         // Inject the content script into the active tab
+         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                files: ['modal.js']
+            }, () => {
+                // Send a message to the content script to show the modal
+                chrome.tabs.sendMessage(tabs[0].id, { action: 'showModal', content: result.text });
+            });
+        });
+
         return result;
     } catch (error) {
         console.error("Error sending payload to the server:", error);
