@@ -79,6 +79,7 @@
 /* Light Mode */
 :root {
     --bg-color: #fbf1c7;
+    --txtbx-color: #fff;
     --text-color: #3c3836;
     --border-color: #d5c4a1;
     --button-bg-color: #a89984;
@@ -91,6 +92,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #282828;
+        --txtbx-color: #282828;
         --text-color: #ebdbb2;
         --border-color: #3c3836;
         --button-bg-color: #504945;
@@ -102,8 +104,8 @@
 
 /* Modal Styles */
 .llm-modal {
-    position: fixed !important; /* Use fixed position to overlay entire viewport */
-    top: 8% !important; /* Move the modal down to start at 20% from the top */
+    position: fixed !important; /* Fixed position to overlay entire viewport */
+    top: 8% !important; /* Move the modal down to start at 8% from the top */
     left: 50% !important; /* Center horizontally */
     transform: translate(-50%, 0) !important; /* Keep position aligned without affecting vertical */
     margin: 0 !important;
@@ -120,38 +122,34 @@
 }
 
 .llm-modal-content {
-    background-color: var(--bg-color); /* Keep the content background color */
+    background-color: var(--bg-color); /* Add a background color to the modal content */
     color: var(--text-color);
     padding: 20px;
-    border: 1px solid var(--border-color);
-    width: 100%; /* Full width within modal container */
-    max-width: 100%; /* Ensure it does not exceed the parent modal width */
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative; /* Ensure content is positioned relative to modal container */
 }
 
+/* Close button styles */
 .llm-close-button {
     color: var(--text-color);
-    position: absolute;
-    top: 10px;
-    right: 20px;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    position: absolute; /* Keep the close button at the top right corner */
+    top: 10px; /* Space from the top */
+    right: 20px; /* Space from the right */
 }
 
+/* Text area styles */
 .llm-modal-text {
-    margin-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    width: 100%;
-    height: 200px; /* Set a height for your editable text area */
+    width: 100%; /* Full width */
+    height: 200px; /* Set a height for the editable text area */
     font-family: 'Courier New', Courier, monospace; /* Monotype font */
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 10px;
-    background-color: var(--bg-color); /* Match the modal's background */
+    background-color: var(--txtbx-color);
     color: var(--text-color); /* Text color */
     resize: none; /* Prevent resizing */
+    margin-top: 30px; /* Space below the close button */
 }
