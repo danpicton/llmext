@@ -131,13 +131,12 @@
 
 /* Close button styles */
 .llm-close-button {
-    color: var(--text-color);
-    font-size: 28px;
-    font-weight: bold;
     cursor: pointer;
     position: absolute; /* Keep the close button at the top right corner */
     top: 10px; /* Space from the top */
     right: 20px; /* Space from the right */
+    width: 24px; /* Set appropriate width as per your image */
+    height: 24px; /* Set appropriate height as per your image */
 }
 
 /* Text area styles */

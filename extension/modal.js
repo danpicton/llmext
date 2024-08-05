@@ -1,9 +1,10 @@
 function createModal(content) {
     const modal = document.createElement('div');
     modal.className = 'llm-modal show'; // Show the modal
+    let imgCloseModal = chrome.runtime.getURL('x.png');
     modal.innerHTML = `
         <div class="llm-modal-content">
-            <span class="llm-close-button">&times;</span>
+            <img class="llm-close-button" src="${imgCloseModal}" alt="Close button" />
             <textarea class="llm-modal-text">${content}</textarea>
         </div>
     `;
