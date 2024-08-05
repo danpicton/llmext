@@ -4,7 +4,7 @@ function createModal(content) {
     modal.innerHTML = `
         <div class="llm-modal-content">
             <span class="llm-close-button">&times;</span>
-            <textarea class="llm-modal-text" readonly>${content}</textarea>
+            <textarea class="llm-modal-text">${content}</textarea>
         </div>
     `;
     document.body.appendChild(modal);
