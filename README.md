@@ -48,16 +48,16 @@ llmext is a Chrome extension that allows users to easily send selected text or i
    python test_server.py
    ```
 
+## Configuration
+
+Copy the `config.js.example` to your own `config.js` file. You can then set your `textEndpoint` and `imgEndpoint` for the backend server.
+
 ## Usage
 
 1. Select text or an image in your browser.
 2. Right-click to open the context menu and choose the appropriate option (e.g., "Process text").
 3. If you're sending content with a prompt, a popup will open allowing you to enter your custom prompt.
 4. Click "Send" to send the information to the server.
-
-## Configuration
-
-Modify the `config.js` file (not included in the provided files) to set your `textEndpoint` and `imgEndpoint` for the backend server.
 
 ## Development
 
