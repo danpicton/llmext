@@ -34,7 +34,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "x.png"
+        "x.png",
+        "clipboard-copy.png"
       ],
       "matches": [
         "<all_urls>"

@@ -2,19 +2,30 @@ function createModal(content) {
     const modal = document.createElement('div');
     modal.className = 'llm-modal show'; // Show the modal
     let imgCloseModal = chrome.runtime.getURL('x.png');
+    let imgCopyToClipboard = chrome.runtime.getURL('clipboard-copy.png'); // Add reference to clipboard icon
     modal.innerHTML = `
         <div class="llm-modal-content">
             <img class="llm-close-button" src="${imgCloseModal}" alt="Close button" />
+            <img class="llm-copy-button" src="${imgCopyToClipboard}" alt="Copy to clipboard" />
             <textarea class="llm-modal-text">${content}</textarea>
         </div>
     `;
     document.body.appendChild(modal);
 
     const closeButton = modal.querySelector('.llm-close-button');
+    const copyButton = modal.querySelector('.llm-copy-button'); // Select the copy button
     const textArea = modal.querySelector('.llm-modal-text');
 
     closeButton.addEventListener('click', () => {
         modal.remove();
+    });
+
+    copyButton.addEventListener('click', () => { // Add click event for the copy button
+        navigator.clipboard.writeText(textArea.value).then(() => {
+            console.log('Text copied to clipboard');
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
     });
 
     // Copy content to clipboard when the modal is shown
