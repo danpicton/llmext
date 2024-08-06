@@ -128,14 +128,28 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Close button styles */
-.llm-close-button {
-    cursor: pointer;
-    position: absolute; /* Keep the close button at the top right corner */
-    top: 10px; /* Space from the top */
-    right: 20px; /* Space from the right */
-    width: 24px; /* Set appropriate width as per your image */
-    height: 24px; /* Set appropriate height as per your image */
+.llm-modal-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+
+.llm-close-button, .llm-copy-button {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-right: 10px; /* Space between icons */
+  margin-top: 10px; /* Space above icons */
+}
+
+/* Additional styles to maintain spacing between buttons and textbox */
+.llm-modal-content {
+    display: flex;
+    flex-direction: column; /* Ensure the buttons stack vertically */
+}
+
+.llm-modal-text {
+    margin-top: 50px; /* Ensure space between the buttons and text area */
 }
 
 /* Text area styles */

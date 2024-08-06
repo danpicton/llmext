@@ -5,8 +5,10 @@ function createModal(content) {
     let imgCopyToClipboard = chrome.runtime.getURL('clipboard-copy.png'); // Add reference to clipboard icon
     modal.innerHTML = `
         <div class="llm-modal-content">
-            <img class="llm-close-button" src="${imgCloseModal}" alt="Close button" />
-            <img class="llm-copy-button" src="${imgCopyToClipboard}" alt="Copy to clipboard" />
+            <div class="llm-modal-buttons">
+                <img class="llm-copy-button" src="${imgCopyToClipboard}" alt="Copy to clipboard" />
+                <img class="llm-close-button" src="${imgCloseModal}" alt="Close button" />
+            </div>
             <textarea class="llm-modal-text">${content}</textarea>
         </div>
     `;
