@@ -1,4 +1,9 @@
 function createModal(content) {
+    // Check if a modal already exists
+    if (document.querySelector('.llm-modal')) {
+        return; // Exit if a modal is already present
+    }
+  
     const modal = document.createElement('div');
     modal.className = 'llm-modal show'; // Show the modal
     let imgCloseModal = chrome.runtime.getURL('x.png');

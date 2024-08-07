@@ -91,15 +91,19 @@ async function sendPayloadToServer(endpoint, payload) {
         const result = await response.json();
         console.log("Payload successfully sent to the server:", result);
 
-         // Inject the content script into the active tab
-         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                files: ['modal.js']
-            }, () => {
-                // Send a message to the content script to show the modal
-                chrome.tabs.sendMessage(tabs[0].id, { action: 'showModal', content: result.text });
-            });
+        // Inject the content script into the active tab
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            if (tabs.length > 0) { // Check if there's at least one active tab
+                chrome.scripting.executeScript({
+                    target: { tabId: tabs[0].id },
+                    files: ['modal.js']
+                }, () => {
+                    // Send a message to the content script to show the modal
+                    chrome.tabs.sendMessage(tabs[0].id, { action: 'showModal', content: result.text });
+                });
+            } else {
+                console.error("No active tab found.");
+            }
         });
 
         return result;
@@ -108,13 +112,6 @@ async function sendPayloadToServer(endpoint, payload) {
     }
 }
 
-/**
- * Handle incoming messages from content scripts or other parts of the extension.
- * 
- * @param {Object} request - The message object.
- * @param {Object} sender - The sender of the message.
- * @param {Function} sendResponse - The callback to call with the response.
- */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'sendSelectedText') {
         sendPayloadToServer(config.textEndpoint, {
