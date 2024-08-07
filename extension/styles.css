@@ -112,7 +112,8 @@
     background: transparent !important; /* Outer background transparent */
     z-index: 999999999 !important;
     max-width: 800px !important;
-    min-width: 340px !important;
+    min-width: 640px !important;
+    min-height: 800px !important;
     display: none; /* Hidden by default */
 }
 
@@ -126,6 +127,8 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Ensure the buttons stack vertically */
 }
 
 .llm-modal-buttons {
@@ -142,18 +145,12 @@
   margin-top: 10px; /* Space above icons */
 }
 
-/* Additional styles to maintain spacing between buttons and textbox */
-.llm-modal-content {
-    display: flex;
-    flex-direction: column; /* Ensure the buttons stack vertically */
-}
-
 /* Text area styles */
 .llm-modal-text {
     width: 100%; /* Full width */
     max-width: 100%;
     box-sizing: border-box; /* Include padding and borders in width calculation */
-    height: 200px; /* Set a height for the editable text area */
+    height: 375px; /* Set a height for the editable text area */
     font-family: 'Courier New', Courier, monospace; /* Monotype font */
     border: 1px solid var(--border-color);
     border-radius: 5px;
