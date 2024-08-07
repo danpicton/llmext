@@ -20,20 +20,33 @@ function createModal(content) {
     document.body.appendChild(modal);
 
     const closeButton = modal.querySelector('.llm-close-button');
-    const copyButton = modal.querySelector('.llm-copy-button'); // Select the copy button
+    const copyButton = modal.querySelector('.llm-copy-button');
     const textArea = modal.querySelector('.llm-modal-text');
 
-    closeButton.addEventListener('click', () => {
+    function closeModal() {
         modal.remove();
-    });
+        // Remove the keydown event listener when the modal is closed
+        document.removeEventListener('keydown', handleKeyDown);
+    }
 
-    copyButton.addEventListener('click', () => { // Add click event for the copy button
+    function handleKeyDown(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    }
+
+    closeButton.addEventListener('click', closeModal);
+
+    copyButton.addEventListener('click', () => {
         navigator.clipboard.writeText(textArea.value).then(() => {
             console.log('Text copied to clipboard');
         }).catch(err => {
             console.error('Failed to copy: ', err);
         });
     });
+
+    // Add keydown event listener to the document
+    document.addEventListener('keydown', handleKeyDown);
 
     // Copy content to clipboard when the modal is shown
     navigator.clipboard.writeText(content).then(() => {
