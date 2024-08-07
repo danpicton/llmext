@@ -151,6 +151,8 @@
 /* Text area styles */
 .llm-modal-text {
     width: 100%; /* Full width */
+    max-width: 100%;
+    box-sizing: border-box; /* Include padding and borders in width calculation */
     height: 200px; /* Set a height for the editable text area */
     font-family: 'Courier New', Courier, monospace; /* Monotype font */
     border: 1px solid var(--border-color);
