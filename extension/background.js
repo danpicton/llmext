@@ -112,6 +112,36 @@ async function sendPayloadToServer(endpoint, payload) {
     }
 }
 
+/**
+ * Get selected text from the active tab.
+ * 
+ * @returns {string} - The selected text.
+ */
+function getSelectedText() {
+    return window.getSelection().toString();
+}
+
+// Add listener for keyboard shortcuts
+chrome.commands.onCommand.addListener((command) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs.length > 0) {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: getSelectedText,
+            }, (results) => {
+                const selectedText = results[0]?.result;
+                if (command === "sendTextToBackend" && selectedText) {
+                    sendPayloadToServer(config.textEndpoint, { question: `${config.defaultTextPrompt}\n${selectedText}` });
+                } else if (command === "sendTextToBackendPrompted" && selectedText) {
+                    chrome.storage.local.set({ selectedText, type: 'text' }, () => {
+                        chrome.action.openPopup();
+                    });
+                }
+            });
+        }
+    });
+});
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'sendSelectedText') {
         sendPayloadToServer(config.textEndpoint, {

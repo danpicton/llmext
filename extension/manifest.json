@@ -41,5 +41,19 @@
         "<all_urls>"
       ]
     }
-  ]
+  ],
+    "commands": {
+        "sendTextToBackend": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+0"
+            },
+            "description": "Send selected text to backend without prompt"
+        },
+        "sendTextToBackendPrompted": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+9"
+            },
+            "description": "Send selected text to backend with prompt"
+        }
+    }
 }
