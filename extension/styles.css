@@ -160,3 +160,27 @@
     resize: none; /* Prevent resizing */
     margin-top: 25px; /* Space below the close button */
 }
+
+/* pre-composed prompts */
+.preset-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 5px; /* Space between the buttons */
+    margin-bottom: 20px; /* Add space below the buttons */
+}
+
+.preset-buttons button {
+    padding: 5px 10px; /* Adjust padding for preset buttons */
+    font-size: 14px; /* Adjust font size for better visibility */
+    background: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.preset-buttons button:hover {
+    background: var(--button-hover-bg-color);
+    color: var(--button-hover-text-color);
+}
