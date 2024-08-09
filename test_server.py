@@ -1,51 +1,31 @@
-import http.server
-import socketserver
-import json
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
-class RequestHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "application/json")
-        self._set_cors_headers()
-        self.end_headers()
-        response = {'message': 'Request received. Check server logs for details.'}
-        self.wfile.write(json.dumps(response).encode())
+app = Flask(__name__)
+# Enable CORS for all routes
+CORS(app)
 
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length).decode('utf-8')
+@app.route('/text', methods=['POST'])
+def handle_text_request():
+    data = request.json
+    print(f"Received POST request on /text endpoint. Data: {data}")
+    
+    # Dummy response for text
+    response = {
+        'text': (f'• Dummy summary of "{data.get("question", "")}"\n\t• Detail 1\n\t• Detail 2')
+    }
+    return jsonify(response)
 
-        if self.path == '/text':
-            print(f"Received POST request on /text endpoint. Data: {post_data}")
-            response = {'message': 'Text request received. Check server logs for details.'}
-        elif self.path == '/image':
-            print(f"Received POST request on /image endpoint. Data: {post_data}")
-            response = {'message': 'Image URL request received. Check server logs for details.'}
-        else:
-            self.send_response(404)
-            self.end_headers()
-            self.wfile.write(b'Endpoint not found.')
-            return
+@app.route('/image', methods=['POST'])
+def handle_image_request():
+    data = request.json
+    print(f"Received POST request on /image endpoint. Data: {data}")
 
-        self.send_response(200)
-        self._set_cors_headers()
-        self.send_header("Content-type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps(response).encode())
-        
-    def do_OPTIONS(self):
-        self.send_response(200)
-        self._set_cors_headers()
-        self.end_headers()
+    # Dummy response for image
+    response = {
+        'text': (f'• Dummy summary of image URL "{data.get("imageUrl", "")}"\n\t• Interpretation 1\n\t• Interpretation 2')
+    }
+    return jsonify(response)
 
-    def _set_cors_headers(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-
-PORT = 8080
-Handler = RequestHandler
-
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Serving at port {PORT}")
-    httpd.serve_forever()
+if __name__ == '__main__':
+    app.run(port=8080)
