@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Set your OpenAI API key
-openai.api_key = OPEN_API_KEY
+openai.api_key = OPENAI_API_KEY
 
 def fetch_image(url):
     """Fetch an image from a URL."""
