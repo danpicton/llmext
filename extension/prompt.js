@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
             promptText.value = "Explain this like I'm 5";
         });
         document.getElementById('btnSummarise').addEventListener('click', () => {
-            promptText.value = "Please summarise the following";
+            promptText.value = "Please summarise";
         });
         document.getElementById('btnStepByStep').addEventListener('click', () => {
-            promptText.value = "Provide a step-by-step guide for";
+            promptText.value = "Provide a step-by-step guide";
         });
     });
 });
