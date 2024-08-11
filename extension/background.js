@@ -16,9 +16,7 @@ chrome.runtime.onInstalled.addListener(() => {
 function createContextMenus() {
     const contextMenuItems = [
         { id: "sendTextToBackend", title: "Process text", contexts: ["selection"] },
-        { id: "sendTextToBackendPrompted", title: "Process text with prompt", contexts: ["selection"] },
-        { id: "sendImageToBackend", title: "Process image", contexts: ["image"] },
-        { id: "sendImageToBackendPrompted", title: "Process image with prompt", contexts: ["image"] }
+        { id: "sendTextToBackendPrompted", title: "Process text with prompt", contexts: ["selection"] }
     ];
 
     contextMenuItems.forEach(item => {
@@ -48,18 +46,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         case "sendTextToBackendPrompted":
             if (info.selectionText) {
                 chrome.storage.local.set({ selectedText: info.selectionText, type: 'text' }, () => {
-                    chrome.action.openPopup();
-                });
-            }
-            break;
-        case "sendImageToBackend":
-            if (info.srcUrl) {
-                sendPayloadToServer(config.imgEndpoint, { imageUrl: info.srcUrl });
-            }
-            break;
-        case "sendImageToBackendPrompted":
-            if (info.srcUrl) {
-                chrome.storage.local.set({ selectedText: info.srcUrl, type: 'image' }, () => {
                     chrome.action.openPopup();
                 });
             }
@@ -147,11 +133,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendPayloadToServer(config.textEndpoint, {
             question: `Please apply this prompt "${request.prompt}" to the following text:\n${request.text}`
         });
-    } else if (request.action === 'sendImageUrl') {
-        sendPayloadToServer(config.imgEndpoint, {
-            imageUrl: request.imageUrl,
-            prompt: request.prompt
-        });
     }
     sendResponse({ status: 'success' });
 });
+
+
+        
