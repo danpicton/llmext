@@ -30,7 +30,7 @@ def handle_text_request():
         answer = response.choices[0].message.content
 
         # Return the response data
-        return jsonify({"text": answer})g
+        return jsonify({"text": answer})
 
     except Exception as e:
         print(f"Error processing text with OpenAI: {e}")
