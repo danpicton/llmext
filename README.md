@@ -2,16 +2,14 @@
 
 ## Description
 
-llmext is a Chrome extension that allows users to easily send selected text or image URLs to a backend server for processing. It provides context menu options for sending content directly from the browser and a user-friendly popup for adding custom prompts to enhance the processing of the selected content.
+llmext is a Chrome extension that allows users to easily send selected text to a backend server for processing with LLMs. It provides context menu options for sending content directly from the browser and a user-friendly popup for adding custom prompts to enhance the processing of the selected content.
 
 ## Features
 
 - **Context Menu**: Right-click context menu options to:
   - Process selected text
   - Process selected text with a custom prompt
-  - Process images by URL
-  - Process images by URL with a custom prompt
-- **Popup Interface**: A popup interface for entering prompts when selected text or images are sent.
+- **Popup Interface**: A popup interface for entering prompts when selected text sent.
 - **Customizable**: Easily modify the code to suit your specific needs, including changing the server endpoints or the behavior of the extension.
 
 ## Directory Structure
@@ -24,6 +22,8 @@ llmext is a Chrome extension that allows users to easily send selected text or i
 │   ├── prompt.html
 │   ├── prompt.js
 │   ├── styles.css
+│   ├── x.png
+│   ├── clipboard-copy.png
 │   └── brain-circuit.png
 ├── test_server.py
 └── README.md
@@ -50,11 +50,11 @@ llmext is a Chrome extension that allows users to easily send selected text or i
 
 ## Configuration
 
-Copy the `config.js.example` to your own `config.js` file. You can then set your `textEndpoint` and `imgEndpoint` for the backend server.
+Copy the `config.js.example` to your own `config.js` file. You can then set your `textEndpoint` for the backend server.
 
 ## Usage
 
-1. Select text or an image in your browser.
+1. Select text in your browser.
 2. Right-click to open the context menu and choose the appropriate option (e.g., "Process text").
 3. If you're sending content with a prompt, a popup will open allowing you to enter your custom prompt.
 4. Click "Send" to send the information to the server.
